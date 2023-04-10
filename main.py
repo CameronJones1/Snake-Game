@@ -14,12 +14,14 @@ from pygame.locals import (
 pygame.init()
 display_width = 400
 display_height = 500
-gameDisplay = pygame.display.set_mode((display_width,display_height))
+screen = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('basic game')
 clock = pygame.time.Clock()
 gray = (128,128,128)
-gameDisplay.fill(gray)
-head = pygame.draw.rect(gameDisplay,(0,255,0),pygame.Rect(30, 30, 30, 30))
+screen.fill(gray)
+head = pygame.Surface((30,30))
+head.fill((0,255,0))
+head_Rect = head.get_rect()
 
 
 # Press the green button in the gutter to run the script.
@@ -29,16 +31,16 @@ while(1):
             pygame.quit()
         if event.type == pygame.KEYDOWN:
             if event.key == K_UP:
-                print("up")
+                head_Rect.move_ip(0,-30)
             if event.key == K_DOWN:
-                print("Down")
+                head_Rect.move_ip(0,30)
             if event.key == K_LEFT:
-                print("Left")
+                head_Rect.move_ip(-30, 0)
             if event.key == K_RIGHT:
-                print("Right")
+                head_Rect.move_ip(30, 0)
 
-
-
+    screen.fill(gray)
+    screen.blit(head,head_Rect)
     pygame.display.update()
     clock.tick(60)
 
